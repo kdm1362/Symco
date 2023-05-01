@@ -14,24 +14,24 @@ public class PuLogin : MonoBehaviour, PuInterface
         Debug.Log("ID: " + id.text);
         Debug.Log("PW: " + pw.text);
 
-        // ÀÔ·ÂÇÑ ID°¡ ¾øÀ» °æ¿ì °æ°í
+        // ì…ë ¥í•œ IDê°€ ì—†ì„ ê²½ìš° ê²½ê³ 
         if (id.text.Equals("")) { idWarn(); return; }
-        // ÀÔ·ÂÇÑ PW°¡ ¾øÀ» °æ¿ì °æ°í
+        // ì…ë ¥í•œ PWê°€ ì—†ì„ ê²½ìš° ê²½ê³ 
         if (pw.text.Equals("")) { pwWarn(); return; }
 
-        // TODO: ·Î±×ÀÎ ·ÎÁ÷ ±¸ÇöÇÒ °Í
+        // TODO: ë¡œê·¸ì¸ ë¡œì§ êµ¬í˜„í•  ê²ƒ
         string result = login();
         if (result.Equals("")) { loginWarn(); return; }
-        // Ã³¸®°¡ ³¡³ª¸é ÆË¾÷À» Á¾·á
+        // ì²˜ë¦¬ê°€ ëë‚˜ë©´ íŒì—…ì„ ì¢…ë£Œ
         close();
-        // »ç¿ëÀÚº° ¸ŞÀÎÈ­¸é Ç¥Ãâ½ÃÅ°±â
+        // ì‚¬ìš©ìë³„ ë©”ì¸í™”ë©´ í‘œì¶œì‹œí‚¤ê¸°
     }
 
     private string login()
     {
         if (false)
         {
-            // »ç¿ëÀÚ ·Î±×ÀÎ ¼º°ø ½Ã
+            // ì‚¬ìš©ì ë¡œê·¸ì¸ ì„±ê³µ ì‹œ
             return "GUID";
         }
         return "";
@@ -39,35 +39,35 @@ public class PuLogin : MonoBehaviour, PuInterface
 
     private void idWarn()
     {
-        id.placeholder.GetComponent<TMPro.TextMeshProUGUI>().text = "ID¸¦ ÀÔ·ÂÇÏ¼¼¿ä!";
+        id.placeholder.GetComponent<TMPro.TextMeshProUGUI>().text = "IDë¥¼ ì…ë ¥í•˜ì„¸ìš”!";
         id.placeholder.color = Color.red;
     }
     private void pwWarn()
     {
-        pw.placeholder.GetComponent<TMPro.TextMeshProUGUI>().text = "PW¸¦ ÀÔ·ÂÇÏ¼¼¿ä!";
+        pw.placeholder.GetComponent<TMPro.TextMeshProUGUI>().text = "PWë¥¼ ì…ë ¥í•˜ì„¸ìš”!";
         pw.placeholder.color = Color.red;
     }
     private void loginWarn()
     {
         pw.text = "";
-        pw.placeholder.GetComponent<TMPro.TextMeshProUGUI>().text = "ID¶Ç´Â PW°¡ Àß¸øµÇ¾ú½À´Ï´Ù.";
+        pw.placeholder.GetComponent<TMPro.TextMeshProUGUI>().text = "IDë˜ëŠ” PWê°€ ì˜ëª»ë˜ì—ˆìŠµë‹ˆë‹¤.";
         pw.placeholder.color = Color.red;
     }
     private void WarnInit()
     {
-        id.placeholder.GetComponent<TMPro.TextMeshProUGUI>().text = "»ç¿ëÇÒ ID¸¦ ÀÔ·ÂÇÏ¼¼¿ä";
+        id.placeholder.GetComponent<TMPro.TextMeshProUGUI>().text = "ì‚¬ìš©í•  IDë¥¼ ì…ë ¥í•˜ì„¸ìš”";
         id.placeholder.color = Color.gray;
-        pw.placeholder.GetComponent<TMPro.TextMeshProUGUI>().text = "»ç¿ëÇÒ PW¸¦ ÀÔ·ÂÇÏ¼¼¿ä";
+        pw.placeholder.GetComponent<TMPro.TextMeshProUGUI>().text = "ì‚¬ìš©í•  PWë¥¼ ì…ë ¥í•˜ì„¸ìš”";
         pw.placeholder.color = Color.gray;
     }
     private void clear()
     {
-        // ÀÔ·ÂÄ­ ºñ¿ì±â
+        // ì…ë ¥ì¹¸ ë¹„ìš°ê¸°
         id.text = "";
         pw.text = "";
     }
 
-    // ÆË¾÷ Á¾·á µîÀÇ »óÈ²¿¡¼­ ÀÔ·ÂÄ­ ÃÊ±âÈ­¸¦ À§ÇÔ
+    // íŒì—… ì¢…ë£Œ ë“±ì˜ ìƒí™©ì—ì„œ ì…ë ¥ì¹¸ ì´ˆê¸°í™”ë¥¼ ìœ„í•¨
     public void InitPopup()
     {
         clear();
