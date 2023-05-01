@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class PuAddUser : MonoBehaviour
+public class PuAddUser : MonoBehaviour, PuInterface
 {
     [SerializeField]
     public TMPro.TMP_InputField id;
@@ -31,8 +31,7 @@ public class PuAddUser : MonoBehaviour
         // TODO: 처리 성공여부를 알리는 토스트 메시지 띄울것
 
         // 처리가 끝나면 팝업을 종료
-        InitPopup();
-        this.gameObject.SetActive(false);
+        close();
     }
 
     private void idWarn()
@@ -73,5 +72,10 @@ public class PuAddUser : MonoBehaviour
     {
         clear();
         WarnInit();
+    }
+    public void close()
+    {
+        InitPopup();
+        this.gameObject.SetActive(false);
     }
 }

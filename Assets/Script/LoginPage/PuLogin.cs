@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PuLogin : MonoBehaviour
+public class PuLogin : MonoBehaviour, PuInterface
 {
     [SerializeField]
     public TMPro.TMP_InputField id;
@@ -23,8 +23,7 @@ public class PuLogin : MonoBehaviour
         string result = login();
         if (result.Equals("")) { loginWarn(); return; }
         // 처리가 끝나면 팝업을 종료
-        InitPopup();
-        this.gameObject.SetActive(false);
+        close();
         // 사용자별 메인화면 표출시키기
     }
 
@@ -73,5 +72,11 @@ public class PuLogin : MonoBehaviour
     {
         clear();
         WarnInit();
+    }
+
+    public void close()
+    {
+        InitPopup();
+        this.gameObject.SetActive(false);
     }
 }
