@@ -8,6 +8,13 @@ public class PuLogin : MonoBehaviour, PuInterface
     public TMPro.TMP_InputField id;
     [SerializeField]
     public TMPro.TMP_InputField pw;
+
+    private HUser handleUser;
+    private void Awake()
+    {
+        handleUser = new HUser();
+    }
+
     public void onClickLogin()
     {
         Debug.Log("addUser onClick run.");
@@ -20,21 +27,11 @@ public class PuLogin : MonoBehaviour, PuInterface
         if (pw.text.Equals("")) { pwWarn(); return; }
 
         // TODO: 로그인 로직 구현할 것
-        string result = login();
-        if (result.Equals("")) { loginWarn(); return; }
+        HUserFile result = handleUser.login(id.text, pw.text);
+        if (result.IsValid() != 0) { loginWarn(); return; }
         // 처리가 끝나면 팝업을 종료
         close();
-        // 사용자별 메인화면 표출시키기
-    }
-
-    private string login()
-    {
-        if (false)
-        {
-            // 사용자 로그인 성공 시
-            return "GUID";
-        }
-        return "";
+        // TODO: 사용자별 메인화면 표출시키기
     }
 
     private void idWarn()
