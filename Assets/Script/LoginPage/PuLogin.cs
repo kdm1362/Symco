@@ -50,7 +50,7 @@ public class PuLogin : MonoBehaviour, PuInterface
     private void loginWarn()
     {
         pw.text = "";
-        pw.placeholder.GetComponent<TMPro.TextMeshProUGUI>().text = "ID또는 PW가 잘못되었습니다.";
+        pw.placeholder.GetComponent<TMPro.TextMeshProUGUI>().text = "ID 또는 PW가 잘못되었습니다.";
         pw.placeholder.color = Color.red;
     }
     private void WarnInit()

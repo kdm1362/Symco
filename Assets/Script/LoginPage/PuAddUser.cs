@@ -12,6 +12,15 @@ public class PuAddUser : MonoBehaviour, PuInterface
     [SerializeField]
     public TMPro.TMP_InputField pwCfm;
 
+    HUser handleUser;
+    ToastMessage toast;
+
+    void Awake()
+    {
+        handleUser = new HUser();
+        toast = FindObjectOfType<ToastMessage>();
+    }
+
     public void onClickConfirm()
     {
         Debug.Log("addUser onClick run.");
@@ -26,9 +35,13 @@ public class PuAddUser : MonoBehaviour, PuInterface
         // 확인용 비밀번호가 서로 다들경우 경고
         if (!pw.text.Equals(pwCfm.text)) { pwCheckWarn();  return; }
 
-        // TODO: 사용자 추가 로직 구현할 것
-        // TODO: 이미사용중인 ID일경우 처리할 것
+        // 사용자 추가
+        int result = handleUser.addUser(id.text, pw.text);
+        // ID가 이미 사용중일 경우 경고
+        if (result != 0) { toast.message("이미 사용중인 ID입니다"); return; }
+
         // TODO: 처리 성공여부를 알리는 토스트 메시지 띄울것
+        toast.message("사용자 등록이 완료되었습니다.");
 
         // 처리가 끝나면 팝업을 종료
         close();

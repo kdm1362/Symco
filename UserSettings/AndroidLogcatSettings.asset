@@ -1,9 +1,9 @@
 {
-    "m_SelectedDeviceId": "R5CT21HQECM",
+    "m_SelectedDeviceId": "192.168.31.31:5555",
     "m_SelectedPackage": {
-        "deviceId": "R5CT21HQECM",
+        "deviceId": "192.168.31.31:5555",
         "name": "org.kyongwoon.symcoEdu",
-        "processId": 1500,
+        "processId": 19489,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -30,6 +30,12 @@
             "deviceId": "R5CT21HQECM",
             "name": "org.kyongwoon.symcoEdu",
             "processId": 1500,
+            "exited": false
+        },
+        {
+            "deviceId": "192.168.31.31:5555",
+            "name": "org.kyongwoon.symcoEdu",
+            "processId": 19489,
             "exited": false
         }
     ],
