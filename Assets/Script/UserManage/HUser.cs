@@ -59,8 +59,8 @@ public class HUser : MonoBehaviour
 
     public void checkAdminAcount()
     {
-        // 관리자 계정이 없을 경우 생성
-        int result = addUser("teacher", "어두운밤하늘별자리같이");
+        // 관리자 계정이 없을 경우 생성 // 어두운밤하늘별자리같이
+        int result = addUser("teacher", "lighthouse0#");
         if (result == 0)
             Debug.Log("관리자 계정 생성됨");
         else
