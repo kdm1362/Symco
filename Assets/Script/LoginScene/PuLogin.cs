@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PuLogin : MonoBehaviour, PuInterface
 {
@@ -26,12 +27,15 @@ public class PuLogin : MonoBehaviour, PuInterface
         // 입력한 PW가 없을 경우 경고
         if (pw.text.Equals("")) { pwWarn(); return; }
 
-        // TODO: 로그인 로직 구현할 것
+        // 로그인 로직
         HUserFile result = handleUser.login(id.text, pw.text);
         if (result.IsValid() != 0) { loginWarn(); return; }
+        // 앱 실행 중 로그인 정보 저장
+        SymcoManager.instance.userLogin = result;
         // 처리가 끝나면 팝업을 종료
         close();
-        // TODO: 사용자별 메인화면 표출시키기
+        // 사용자별 메인화면 표출시키기
+        SceneManager.LoadScene("MainMenu");
     }
 
     private void idWarn()

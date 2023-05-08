@@ -7,19 +7,6 @@ using UnityEngine.UI;
 
 public class HUser : MonoBehaviour
 {
-    private bool isAdmin;
-    public HUser()
-    {
-        // 몬가 몬가가 일어나고 있다!
-        isAdmin = false;
-    }
-
-    public HUser(bool admin)
-    {
-        this.isAdmin = admin;
-    }
-
-
     public int addUser(string id, string pw)
     {
         // 만들고하 하는 id가 이미 있을 경우 -1, 생성 성공 시 0
@@ -27,7 +14,7 @@ public class HUser : MonoBehaviour
         // id가 이미 존재하는지 확인
         if (PlayerPrefs.HasKey(id))
         {
-            Debug.Log("동일 ID 사용자가 존재함");
+            Debug.Log("Symco_info: This ID is already using");
             return -1;
         }
 
@@ -62,20 +49,22 @@ public class HUser : MonoBehaviour
         // 관리자 계정이 없을 경우 생성 // 어두운밤하늘별자리같이
         int result = addUser("teacher", "lighthouse0#");
         if (result == 0)
-            Debug.Log("관리자 계정 생성됨");
+            Debug.Log("Symco_info: Adimnistrator account cteated");
         else
-            Debug.Log("관리자 계정 확인됨");
+            Debug.Log("Symco_info: Administrator account checked");
     }
 
     public HUserFile login(string id, string pw)
     {
         // id가 없을 경우 -1, pw가 안맞을 경우 -2, 성공시 0 반환
+        HUserFile result;
 
         // id 유무 확인
         if (!PlayerPrefs.HasKey(id))
         {
-            Debug.Log("입력된 ID는 존재하지 않음");
-            return new HUserFile(-1);
+            Debug.Log("Symco_info: this ID is not found");
+            result = new HUserFile(-1);
+            return result;
         }
 
         // pw 확인
@@ -83,27 +72,29 @@ public class HUser : MonoBehaviour
         string shadow = PlayerPrefs.GetString(id);
         if (!shadow.Equals(hash))
         {
-            Debug.Log("PW가 일치하지 않음");
-            return new HUserFile(-2);
+            Debug.Log("Symco_info: PW does not matched");
+            result = new HUserFile(-2);
+            return result;
         }
 
         // 로그인 성공
-        Debug.Log("로그인 성공");
-        return new HUserFile(id);
+        Debug.Log("Symco_info: Login success");
+        result = new HUserFile(id);
+        return result;
     }
 
-    public int deleteUser(string id, string pw)
+    public int deleteUser(string id, string pw, HUserFile userLogin)
     {
         // id가 없을 경우 -1, pw가 안맞을 경우 -2, 성공시 0 반환
         if (!PlayerPrefs.HasKey(id))
         {
-            Debug.Log("삭제할 ID가 존재하지 않음");
+            Debug.Log("Symco_info: Could not found ID to Delete");
             return -1;
         }
-        // 비밀번호가 다르고 관리자가 아니면 튕기기
-        if (!getSHA256(pw).Equals(PlayerPrefs.GetString(id)) && !isAdmin)
+        // 비밀번호가 다르거나 관리자가 아니면 튕기기
+        if (!(getSHA256(pw).Equals(PlayerPrefs.GetString(id)) || userLogin.IsAdmin()))
         {
-            Debug.Log("삭제한 사용자 PW가 일치하지 않음");
+            Debug.Log("Symco_info: PW does not matched");
             return -2;
         }
 

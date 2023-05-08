@@ -5,17 +5,24 @@ using System;
 using System.IO;
 using System.Xml;
 
-public class HUserFile : MonoBehaviour
+public class HUserFile
 {
     private string username;
     private string PATH;
     private int validFlag;
+    private bool isAdmin;
+
     public HUserFile(string username)
     {
         this.username = username;
         this.PATH = Path.Combine(Application.persistentDataPath, username);
         this.validFlag = 0;
-        Debug.Log("사용자 폴더 위치: " + this.PATH);
+        if (username.Equals("teacher"))
+            this.isAdmin = true;
+        else
+            this.isAdmin = false;
+        Debug.Log("Symco_info: is this Admin = " + this.isAdmin.ToString());
+        Debug.Log("Symco_info: User Folder Location: " + this.PATH);
     }
     public HUserFile(int valid)
     {
@@ -26,6 +33,21 @@ public class HUserFile : MonoBehaviour
     {
         return this.validFlag;
     }
+    
+    public bool IsAdmin()
+    {
+        return this.isAdmin;
+    }
+
+    public string getUserName()
+    {
+        return this.username;
+    }
+
+    public string getPath()
+    {
+        return this.PATH;
+    }
 
     public bool createUserHome()
     {
@@ -35,14 +57,14 @@ public class HUserFile : MonoBehaviour
             {
                 // 사용자 폴더 생성은 계정 생성 시 한번만 실행되어야 한다.
                 // 일련의 오류로 이전 사용자 폴더가 남았을 경우 지우고 새로 만든다.
-                Debug.Log("사용되지 않는 동명의 사용자 정보 삭제");
+                Debug.Log("Symco_info: Delete unusing same name Folder");
                 deleteUserHome();
             }
 
             Directory.CreateDirectory(this.PATH);
         }
         catch (Exception e){
-            Debug.LogError("사용자 폴더 생성 실패");
+            Debug.LogError("Symco_info: User Folder create Failed");
             Debug.LogError(e);
             return false;
         }
@@ -67,7 +89,7 @@ public class HUserFile : MonoBehaviour
             }
         } catch(Exception e)
         {
-            Debug.LogError("사용자 폴더 삭제 실패");
+            Debug.LogError("Symco_info: User Folder Deleted Failed");
             Debug.LogError(e);
             return false;
         }
