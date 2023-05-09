@@ -31,4 +31,15 @@ public class SymcoManager : MonoBehaviour
     {
         Debug.Log("Symco_info: " + debug);
     }
+
+    public static void symcoDebugError(System.Exception e)
+    {
+        Debug.LogError("Symco_Error: " + e);
+    }
+
+    public static void symcoDebugError(string e)
+    {
+        Debug.LogError("Symco_Error: " + e);
+    }
+
 }

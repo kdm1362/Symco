@@ -23,10 +23,10 @@ public class PuAddUser : MonoBehaviour, PuInterface
 
     public void onClickConfirm()
     {
-        Debug.Log("addUser onClick run.");
-        Debug.Log("ID: " + id.text);
-        Debug.Log("PW: " + pw.text);
-        Debug.Log("PW: " + pwCfm.text);
+        SymcoManager.symcoDebugInfo("addUser onClick run.");
+        SymcoManager.symcoDebugInfo("ID: " + id.text);
+        SymcoManager.symcoDebugInfo("PW: " + pw.text);
+        SymcoManager.symcoDebugInfo("PW: " + pwCfm.text);
 
         // ID가 없을 경우 경고
         if (id.text.Equals("")) { idWarn(); return; }

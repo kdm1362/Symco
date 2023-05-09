@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "192.168.31.31:5555",
         "name": "org.kyongwoon.symcoEdu",
-        "processId": 19489,
+        "processId": 23430,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -36,6 +36,24 @@
             "deviceId": "192.168.31.31:5555",
             "name": "org.kyongwoon.symcoEdu",
             "processId": 19489,
+            "exited": true
+        },
+        {
+            "deviceId": "192.168.31.31:5555",
+            "name": "org.kyongwoon.symcoEdu",
+            "processId": 20401,
+            "exited": true
+        },
+        {
+            "deviceId": "192.168.31.31:5555",
+            "name": "com.sec.android.app.launcher",
+            "processId": 3842,
+            "exited": false
+        },
+        {
+            "deviceId": "192.168.31.31:5555",
+            "name": "org.kyongwoon.symcoEdu",
+            "processId": 23430,
             "exited": false
         }
     ],

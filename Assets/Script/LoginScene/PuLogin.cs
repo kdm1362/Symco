@@ -18,9 +18,9 @@ public class PuLogin : MonoBehaviour, PuInterface
 
     public void onClickLogin()
     {
-        Debug.Log("addUser onClick run.");
-        Debug.Log("ID: " + id.text);
-        Debug.Log("PW: " + pw.text);
+        SymcoManager.symcoDebugInfo("addUser onClick run.");
+        SymcoManager.symcoDebugInfo("ID: " + id.text);
+        SymcoManager.symcoDebugInfo("PW: " + pw.text);
 
         // 입력한 ID가 없을 경우 경고
         if (id.text.Equals("")) { idWarn(); return; }

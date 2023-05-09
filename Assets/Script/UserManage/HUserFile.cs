@@ -21,8 +21,8 @@ public class HUserFile
             this.isAdmin = true;
         else
             this.isAdmin = false;
-        Debug.Log("Symco_info: is this Admin = " + this.isAdmin.ToString());
-        Debug.Log("Symco_info: User Folder Location: " + this.PATH);
+        SymcoManager.symcoDebugInfo("Symco_info: is this Admin = " + this.isAdmin.ToString());
+        SymcoManager.symcoDebugInfo("Symco_info: User Folder Location: " + this.PATH);
     }
     public HUserFile(int valid)
     {
@@ -57,15 +57,15 @@ public class HUserFile
             {
                 // 사용자 폴더 생성은 계정 생성 시 한번만 실행되어야 한다.
                 // 일련의 오류로 이전 사용자 폴더가 남았을 경우 지우고 새로 만든다.
-                Debug.Log("Symco_info: Delete unusing same name Folder");
+                SymcoManager.symcoDebugInfo("Symco_info: Delete unusing same name Folder");
                 deleteUserHome();
             }
 
             Directory.CreateDirectory(this.PATH);
         }
         catch (Exception e){
-            Debug.LogError("Symco_info: User Folder create Failed");
-            Debug.LogError(e);
+            SymcoManager.symcoDebugInfo("Symco_info: User Folder create Failed");
+            SymcoManager.symcoDebugError(e);
             return false;
         }
         return true;
@@ -89,8 +89,8 @@ public class HUserFile
             }
         } catch(Exception e)
         {
-            Debug.LogError("Symco_info: User Folder Deleted Failed");
-            Debug.LogError(e);
+            SymcoManager.symcoDebugError("Symco_info: User Folder Deleted Failed");
+            SymcoManager.symcoDebugError(e);
             return false;
         }
 
