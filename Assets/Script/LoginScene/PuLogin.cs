@@ -18,7 +18,7 @@ public class PuLogin : MonoBehaviour, PuInterface
 
     public void onClickLogin()
     {
-        SymcoManager.symcoDebugInfo("addUser onClick run.");
+        SymcoManager.symcoDebugInfo("Login onClick run.");
         SymcoManager.symcoDebugInfo("ID: " + id.text);
         SymcoManager.symcoDebugInfo("PW: " + pw.text);
 

@@ -14,7 +14,7 @@ public class HUser : MonoBehaviour
         // id가 이미 존재하는지 확인
         if (PlayerPrefs.HasKey(id))
         {
-            SymcoManager.symcoDebugInfo("Symco_info: This ID is already using");
+            SymcoManager.symcoDebugInfo("This ID is already using");
             return -1;
         }
 
@@ -49,9 +49,9 @@ public class HUser : MonoBehaviour
         // 관리자 계정이 없을 경우 생성 // 어두운밤하늘별자리같이
         int result = addUser("teacher", "lighthouse0#");
         if (result == 0)
-            SymcoManager.symcoDebugInfo("Symco_info: Adimnistrator account cteated");
+            SymcoManager.symcoDebugInfo("Adimnistrator account cteated");
         else
-            SymcoManager.symcoDebugInfo("Symco_info: Administrator account checked");
+            SymcoManager.symcoDebugInfo("Administrator account checked");
     }
 
     public HUserFile login(string id, string pw)
@@ -62,7 +62,7 @@ public class HUser : MonoBehaviour
         // id 유무 확인
         if (!PlayerPrefs.HasKey(id))
         {
-            SymcoManager.symcoDebugInfo("Symco_info: this ID is not found");
+            SymcoManager.symcoDebugInfo("this ID is not found");
             result = new HUserFile(-1);
             return result;
         }
@@ -72,13 +72,13 @@ public class HUser : MonoBehaviour
         string shadow = PlayerPrefs.GetString(id);
         if (!shadow.Equals(hash))
         {
-            SymcoManager.symcoDebugInfo("Symco_info: PW does not matched");
+            SymcoManager.symcoDebugInfo("PW does not matched");
             result = new HUserFile(-2);
             return result;
         }
 
         // 로그인 성공
-        SymcoManager.symcoDebugInfo("Symco_info: Login success");
+        SymcoManager.symcoDebugInfo("Login success");
         result = new HUserFile(id);
         return result;
     }
@@ -88,13 +88,13 @@ public class HUser : MonoBehaviour
         // id가 없을 경우 -1, pw가 안맞을 경우 -2, 성공시 0 반환
         if (!PlayerPrefs.HasKey(id))
         {
-            SymcoManager.symcoDebugInfo("Symco_info: Could not found ID to Delete");
+            SymcoManager.symcoDebugInfo("Could not found ID to Delete");
             return -1;
         }
         // 비밀번호가 다르거나 관리자가 아니면 튕기기
         if (!(getSHA256(pw).Equals(PlayerPrefs.GetString(id)) || userLogin.IsAdmin()))
         {
-            SymcoManager.symcoDebugInfo("Symco_info: PW does not matched");
+            SymcoManager.symcoDebugInfo("PW does not matched");
             return -2;
         }
 

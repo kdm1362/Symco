@@ -1084,7 +1084,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "PW\uB4E4 \uC785\uB825\uD558\uC138\uC694"
+  m_text: "PW\uB97C \uC785\uB825\uD558\uC138\uC694"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 853d833b3f86775488edde335e46ee47, type: 2}
   m_sharedMaterial: {fileID: -1740084389253463959, guid: 853d833b3f86775488edde335e46ee47, type: 2}
@@ -3548,7 +3548,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 173.01306, y: 0}
   m_SizeDelta: {x: 250, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1225960105
@@ -4257,7 +4257,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82d8ddf2c8e139d478fef189dc839d84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  userLogin: {fileID: 0}
 --- !u!4 &1581231605
 Transform:
   m_ObjectHideFlags: 0
