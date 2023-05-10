@@ -61,7 +61,19 @@ public class HUserFile
                 deleteUserHome();
             }
 
+            // 유저 홈 디렉토리 생성
             Directory.CreateDirectory(this.PATH);
+
+            string cursor;
+            // 유저 순서도 디렉토리 생성
+            cursor = Path.Combine(this.PATH, "workbench");
+            Directory.CreateDirectory(cursor);
+
+            // 유저 문제풀이 디렉토리 생성
+            cursor = Path.Combine(this.PATH, "learning");
+            Directory.CreateDirectory(cursor);
+            // 진행상황 저장 파일 생성
+            createScoreCard(Path.Combine(cursor, "scorecard.xml"));
         }
         catch (Exception e){
             SymcoManager.symcoDebugInfo("User Folder create Failed");
@@ -77,15 +89,9 @@ public class HUserFile
         {
             if (Directory.Exists(this.PATH))
             {
-                // 내부 파일 삭제
-                string[] childFiles = Directory.GetFiles(this.PATH);
-                foreach (string cf in childFiles)
-                {
-                    File.Delete(cf);
-                }
                 // TODO: 여기서 코루틴을 이용하여 IO를 기다리는걸 권장
                 // 폴더 삭제
-                Directory.Delete(this.PATH);
+                deleteDirectory(this.PATH);
             }
         } catch(Exception e)
         {
@@ -97,10 +103,41 @@ public class HUserFile
         return true;
     }
 
+    private void deleteDirectory(string path)
+    {
+        try
+        {
+            // 자식 디렉토리 삭제
+            foreach(string childDir in Directory.GetDirectories(path))
+            {
+                deleteDirectory(childDir);
+            }
+            // 자식 파일 삭제
+            foreach (string childFile in Directory.GetFiles(path))
+            {
+                File.Delete(childFile);
+            }
+            // 목표 디렉토리 삭제
+            Directory.Delete(path);
+        }
+        catch(Exception e)
+        {
+            SymcoManager.symcoDebugError(e);
+            return;
+        }
+        SymcoManager.symcoDebugInfo("Remove directory success: " + path);
+    }
+
     // TODO: 문서 생성, 변경, 제거 구현!
     public XmlDocument createFile(string fileName)
     {
         return new XmlDocument();
+    }
+
+    public XmlDocument createScoreCard(string fileName)
+    {
+        XmlDocument score = createFile(fileName);
+        return score;
     }
 
     public bool deleteFile(string fileName)
