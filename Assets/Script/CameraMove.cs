@@ -6,13 +6,19 @@ public class CameraMove : MonoBehaviour
 {
     [SerializeField]
     public float cameraSpeed = 1.0f; // 카메라 이동 속도 변수
+    [SerializeField]
+    public float posx = 0.0f;
+    [SerializeField]
+    public float posy = 0.0f;
+    [SerializeField]
+    public float posz = -10.0f;
 
     private Vector3 dragOrigin;
     private bool dragging = false;
 
     public void resetPosition()
     {
-        transform.position = new Vector3(610.0f, 241.0f, -10.0f);
+        transform.position = new Vector3(posx, posy, posz);
     }
 
     public bool IsPointerOverUIObject(Vector2 touchPos)
