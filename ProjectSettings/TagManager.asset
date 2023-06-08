@@ -6,6 +6,10 @@ TagManager:
   tags:
   - pigraph
   - pigraphcat
+  - Flow
+  - Pebble
+  - Start
+  - End
   layers:
   - Default
   - TransparentFX
