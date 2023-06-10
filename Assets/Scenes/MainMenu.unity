@@ -749,6 +749,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1897575225}
     m_Modifications:
+    - target: {fileID: 2630484007734382698, guid: ac28add4ffe658b4cb4eb27aa4351663, type: 3}
+      propertyPath: m_Padding.m_Bottom
+      value: -40
+      objectReference: {fileID: 0}
     - target: {fileID: 2630484008988393599, guid: ac28add4ffe658b4cb4eb27aa4351663, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
