@@ -5,7 +5,7 @@ using UnityEngine;
 public class Starts : Symbol
 {
     // Start is called before the first frame update
-    void Start()
+    new void Start()
     {
         base.Start();
         this.id = Category.Start;
@@ -13,11 +13,5 @@ public class Starts : Symbol
         Symbol End = GameObject.FindWithTag("End").GetComponent<Symbol>();
         Symbol[] arg = { null, End };
         SetLinks(arg);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        base.Update();
     }
 }

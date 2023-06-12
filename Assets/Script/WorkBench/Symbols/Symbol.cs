@@ -61,7 +61,7 @@ public class Symbol : Linked
         }
     }
 
-    void OnMouseDown()
+    protected void OnMouseDown()
     {
         // 레이캐스트를 사용하여 클릭한 오브젝트가 심볼인지 확인.
         RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
@@ -74,7 +74,7 @@ public class Symbol : Linked
         }
     }
 
-    void OnMouseUp()
+    protected void OnMouseUp()
     {
         isDragging = false;
     }
