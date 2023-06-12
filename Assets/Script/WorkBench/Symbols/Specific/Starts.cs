@@ -5,9 +5,8 @@ using UnityEngine;
 public class Starts : Symbol
 {
     // Start is called before the first frame update
-    new void Start()
+    void Start()
     {
-        base.Start();
         this.id = Category.Start;
         // 끝과 흐름 연결
         Symbol End = GameObject.FindWithTag("End").GetComponent<Symbol>();

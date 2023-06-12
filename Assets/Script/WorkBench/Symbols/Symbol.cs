@@ -33,8 +33,9 @@ public class Symbol : Linked
     public Transform beforePort;
     public Transform afterPort;
 
-    protected void Start()
+    protected void Awake()
     {
+        // 초기화가 되지 전에 등록되어야 함. 에디터 상에서 미리 연결해 둘 것
         // 엣지가 연결 될 위치 등록
         GameObject before = transform.Find("beforePort").gameObject;
         GameObject after = transform.Find("afterPort").gameObject;

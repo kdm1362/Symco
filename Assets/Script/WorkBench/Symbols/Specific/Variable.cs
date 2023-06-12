@@ -62,6 +62,11 @@ public class Variable : Symbol, Executable
         // 범위가 정상이면 리턴
         return content[index];
     }
+
+    public List<object> getContents()
+    {
+        return content;
+    }
     public bool setContent(object cont, int index = 0)
     {
         // 인덱싱 범위 체크
@@ -89,12 +94,12 @@ public class Variable : Symbol, Executable
     }
 
     // Start is called before the first frame update
-    new void Start()
+    void Start()
     {
-        base.Start();
         this.id = Category.Variable;
         this.T = type.none;
         this.content = null;
+        OnClick();
     }
 
 

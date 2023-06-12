@@ -1,9 +1,10 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System;
-using System.IO; 
+using System.IO;
 
-public class droneMovementController : MonoBehaviour {
+public class droneMovementController : MonoBehaviour
+{
 
     #region phisical Parts and related functions
 
@@ -101,9 +102,9 @@ public class droneMovementController : MonoBehaviour {
     /// </summary>
     /// <param name="v">Point the drone has to look at</param>
     public void setLookingPoint(Vector3 v) { lookingAtPoint = v; }
-    
+
     // Indicates if the drone has to stabilize itself to the routePosition or can keep following the target
-    public bool stayOnFixedPoint = false;    
+    public bool stayOnFixedPoint = false;
     public void followTarget(bool b) { stayOnFixedPoint = b; }
 
     #endregion
@@ -150,7 +151,7 @@ public class droneMovementController : MonoBehaviour {
 
     #region outputs to the rotors
 
-    
+
     #endregion
 
     #region Stabilizations
@@ -183,7 +184,7 @@ public class droneMovementController : MonoBehaviour {
         //If this is TRUE we are near the point and with a low velocity. It is not necessary to modify the Power
         if (Mathf.Abs(vel) + Mathf.Abs(distanceToPoint) > 0.005f)
             //modifying the rotors rotation, using the output of the PID
-            modifyAllRotorsRotation(yPID.getU(Err, Time.deltaTime));        
+            modifyAllRotorsRotation(yPID.getU(Err, Time.deltaTime));
     }
 
     /// <summary>
@@ -280,7 +281,7 @@ public class droneMovementController : MonoBehaviour {
         Err *= 1 - keepOnRange01(Math.Abs(idealYaw - mag.getYaw()));
 
         //dS.addLine(new float[] { Err, distanceToPoint, vel, idealVel, acc, idealAcc  });      // use this to save the data to the DataSaver class
-        return zPID.getU(Err, Time.deltaTime);                
+        return zPID.getU(Err, Time.deltaTime);
     }
 
     /// <summary>
@@ -336,10 +337,10 @@ public class droneMovementController : MonoBehaviour {
         //tHeight = new Test("Height test", 1, 20);
 
         // if one of these scripts are enabled, they'll think about the initialization of the PIDs
-        if (gameObject.GetComponent<geneticBehaviour>().enabled == false &&  
+        if (gameObject.GetComponent<geneticBehaviour>().enabled == false &&
             gameObject.GetComponent<twiddleBehaviour>().enabled == false &&
             gameObject.GetComponent<configReader>().enabled == false)
-        { 
+        {
             // if not, we get the values from the settings
             yPID = new PID(droneSettings.verticalPID_P, droneSettings.verticalPID_I, droneSettings.verticalPID_D, droneSettings.verticalPID_U);
             yawPID = new PID(droneSettings.yawPID_P, droneSettings.yawPID_I, droneSettings.yawPID_D, droneSettings.yawPID_U);
@@ -396,7 +397,7 @@ public class droneMovementController : MonoBehaviour {
 
         pV1 += intensity; pV2 -= intensity;
         pO2 += intensity; pO1 -= intensity;
-        
+
         //previousIntensity = totalIntensity;
     }
 
@@ -410,7 +411,7 @@ public class droneMovementController : MonoBehaviour {
         pV1 += intensity; pV2 -= intensity;
         pO1 += intensity; pO2 -= intensity;
 
-       // previousIntensity = totalIntensity;
+        // previousIntensity = totalIntensity;
     }
 
     /// <summary>
@@ -430,6 +431,11 @@ public class droneMovementController : MonoBehaviour {
     }
 
     public bool save = false;
+
+    private string stub_ble()
+    {
+        return "T 00";
+    }
     /// <summary>
     /// Function called each frame
     /// </summary>
@@ -437,76 +443,76 @@ public class droneMovementController : MonoBehaviour {
     {
         if (save) { save = false; dS.saveOnFile(); }
 
-        // 심볼 데이터는 텍스트 파일로 받음(엔터로 구분 line)
-        // 형식 : 대문자 숫자
-        string filePath = @"C:\Users\juhye\d\symbol.txt";
         string line;
-        using (StreamReader reader = new StreamReader(filePath))
+        line = stub_ble();
+        if (line != null)
         {
-            
-            while ((line = reader.ReadLine()) != null){
-                string[] data = line.Split(' ');
-            
-                if (data.Length == 2){
+            string[] data = line.Split(' ');
 
-                    string direction = data[0];
-                    float distance = float.Parse(data[1]);
+            if (data.Length == 2)
+            {
+
+                string direction = data[0];
+                float distance = float.Parse(data[1]);
 
                 // 이동 방향과 이동 거리에 대한 처리 로직 구현
-                    if (direction == "T"){
-                         modifyAllRotorsRotation(distance);
-                    }
-                    else if (direction == "R"){
-                        modifyRollRotorsRotation(distance);
-                    }
-                    else if (direction == "P"){
-                        modifyPitchRotorsRotation(distance);
-                    }
-                    else if (direction == "Y"){
-                        modifyPairsRotorsRotation(distance);
-                    }
-                }   
+                if (direction == "T")
+                {
+                    modifyAllRotorsRotation(distance);
+                }
+                else if (direction == "R")
+                {
+                    modifyRollRotorsRotation(distance);
+                }
+                else if (direction == "P")
+                {
+                    modifyPitchRotorsRotation(distance);
+                }
+                else if (direction == "Y")
+                {
+                    modifyPairsRotorsRotation(distance);
+                }
             }
         }
     }
-        
-        /*
-        string symbol = "Y 50";
-        string[] data = symbol.Split(' ');
 
-        // 데이터 유효성 검사
-        if (data.Length >= 2)
+    /*
+    string symbol = "Y 50";
+    string[] data = symbol.Split(' ');
+
+    // 데이터 유효성 검사
+    if (data.Length >= 2)
+    {
+        // 첫 번째 데이터에 따라 드론 이동 방향 결정
+        switch (data[0])
         {
-            // 첫 번째 데이터에 따라 드론 이동 방향 결정
-            switch (data[0])
-            {
-                case "T":
-                    modifyAllRotorsRotation(float.Parse(data[1]));
-                    break;
-                case "R":
-                    modifyRollRotorsRotation(float.Parse(data[1]));
-                    break;
-                case "P":
-                    modifyPitchRotorsRotation(float.Parse(data[1]));
-                    break;
-                case "Y":
-                    modifyPairsRotorsRotation(float.Parse(data[1]));
-                    break;
-                default:
-                    Debug.Log("Invalid symbol: " + data[0]);
-                    break;
-            }
+            case "T":
+                modifyAllRotorsRotation(float.Parse(data[1]));
+                break;
+            case "R":
+                modifyRollRotorsRotation(float.Parse(data[1]));
+                break;
+            case "P":
+                modifyPitchRotorsRotation(float.Parse(data[1]));
+                break;
+            case "Y":
+                modifyPairsRotorsRotation(float.Parse(data[1]));
+                break;
+            default:
+                Debug.Log("Invalid symbol: " + data[0]);
+                break;
         }
-        else
-        {
-            Debug.Log("Invalid symbol data");
-        }
-        
-    }*/
+    }
+    else
+    {
+        Debug.Log("Invalid symbol data");
+    }
+
+}*/
 
 
 
-        float startAfter = 0.1f;
+    float startAfter = 0.1f;
     /// <summary>
     /// Function at regular time interval
     /// </summary>
@@ -514,8 +520,8 @@ public class droneMovementController : MonoBehaviour {
     {
         // wait 0.1 sec to avoid inizialization problem
         if ((startAfter -= Time.deltaTime) > 0) return;
-             
-        if (stayOnFixedPoint)            
+
+        if (stayOnFixedPoint)
         {
             Vector3 p = mag.worldToLocalPoint(routePosition, target.position);
             targetZ = p.z;
@@ -523,15 +529,15 @@ public class droneMovementController : MonoBehaviour {
             targetY = routePosition.y;
         }
         else
-        {          
+        {
             targetZ = mag.worldToLocalPoint(target.position, lookingAtPoint).z;
             targetX = mag.worldToLocalPoint(routePosition, lookingAtPoint).x;
             targetY = (routePosition.y + target.position.y) / 2f;
         }
 
-        
-        Vector3 thrustVector = Quaternion.AngleAxis(-45, Vector3.up) *  new Vector3(targetX, targetY - transform.position.y, targetZ);
-        Vector3 xComponent = Quaternion.AngleAxis(-45, Vector3.up) * new Vector3(targetX, 0,0);
+
+        Vector3 thrustVector = Quaternion.AngleAxis(-45, Vector3.up) * new Vector3(targetX, targetY - transform.position.y, targetZ);
+        Vector3 xComponent = Quaternion.AngleAxis(-45, Vector3.up) * new Vector3(targetX, 0, 0);
         Vector3 zComponent = Quaternion.AngleAxis(-45, Vector3.up) * new Vector3(0, 0, targetZ);
 
         // drawing the direction vectors, for debugging

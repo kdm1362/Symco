@@ -7,7 +7,6 @@ public class End : Symbol
     // Start is called before the first frame update
     void Start()
     {
-        base.Start();
         this.id = Category.End;
         // 시작과 흐름 연결
         Symbol start = GameObject.FindWithTag("Start").GetComponent<Symbol>();
@@ -16,7 +15,7 @@ public class End : Symbol
     }
 
     // Update is called once per frame
-    void Update()
+    new void Update()
     {
         base.Update();
     }

@@ -22,12 +22,13 @@ public class EdgeRender : MonoBehaviour
         // 시작하면 Symbol 컴포넌트를 가져와서
         // 다음 노드랑 연결하는 엣지를 생성하고 그릴것
         node = GetComponent<Symbol>();
-        drawEdge();
+        if(node.next()!=null)
+            drawEdge();
     }
 
     private void Update()
     {
-        if (checkMovement())
+        if (node.next() != null && checkMovement())
             drawEdge();
     }
 
