@@ -28,7 +28,7 @@ public class EdgeRender : MonoBehaviour
 
     private void Update()
     {
-        if (node.next() != null && checkMovement())
+        if (checkMovement())
             drawEdge();
     }
 
@@ -43,6 +43,7 @@ public class EdgeRender : MonoBehaviour
         // 다음 노드가 없으면 false
         if (node.next() == null)
         {
+            destroyEdge();
             return false;
         }
         // 이전 위치기록이 없으면 false

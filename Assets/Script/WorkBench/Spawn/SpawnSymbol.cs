@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnVari : MonoBehaviour
+public class SpawnSymbol : MonoBehaviour
 {
     [SerializeField]
     public GameObject variPref;
