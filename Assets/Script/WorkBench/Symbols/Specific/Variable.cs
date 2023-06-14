@@ -84,6 +84,7 @@ public class Variable : Symbol, Executable
             GameObject canvas = GameObject.Find("Canvas");
             popup = Instantiate(PopupPref);
             popup.transform.parent = canvas.transform;
+            popup.transform.position = canvas.transform.position;
             popup.GetComponent<ValuePu>().setBelong(this);
         }
     }

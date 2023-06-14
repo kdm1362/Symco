@@ -66,7 +66,10 @@ public class Symbol : Linked
     {
         // 드래그 중 휴지통에 닿으면 삭제
         if (collision.gameObject.tag == "Bin" && isDragging)
+        {
+            disconnectLink();
             Destroy(gameObject);
+        }
     }
 
     protected void OnMouseDown()
