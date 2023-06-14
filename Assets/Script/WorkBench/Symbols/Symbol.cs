@@ -62,6 +62,13 @@ public class Symbol : Linked
         }
     }
 
+    protected void OnCollisionEnter2D(Collision2D collision)
+    {
+        // 드래그 중 휴지통에 닿으면 삭제
+        if (collision.gameObject.tag == "Bin" && isDragging)
+            Destroy(gameObject);
+    }
+
     protected void OnMouseDown()
     {
         // 레이캐스트를 사용하여 클릭한 오브젝트가 심볼인지 확인.
